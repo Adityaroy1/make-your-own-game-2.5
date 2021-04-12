@@ -25,24 +25,33 @@ function draw() {
 		
  	
 	}
-		var gap=Math.round(random(30, 80))
-		if(frameCount%gap===0&& enemygroup.length>0){
-			ebulletgroup.destroyEach()
-			while(ebulletgroup.length<16){
-				enemy_bullets()
-			}
-			
+	var gap=Math.round(random(30, 80))
+	if(frameCount%gap===0&& enemygroup.length>0){
+		ebulletgroup.destroyEach()
+		while(ebulletgroup.length<16){
+			enemy_bullets()
 		}
+		
+	}
 	//killing the enemy
 	for(i=0;i<sbulletgroup.length;i++){
-		for(j=0;j<enemygroup.length){
+		for(j=0;j<enemygroup.length;j++){
 			if(sbulletgroup(i).isTouching(enemygroup(j))){
 				sbulletgroup(i).destroy()
-				enemygroup(j).destroy
+				enemygroup(j).destroy()
 			}
 		}
 	}
-	/
+	//player getting killed
+	for(i=0;i<ebulletgroup.length;i++){
+		
+		if(ebulletgroup(i).isTouching(warship)){
+			ebulletgroup(i).destroy()
+			warship.destroy()
+			gameState=END
+		}
+		
+	}
 	
 	console.log(ebulletgroup.length )       
 	ship_bullets();
